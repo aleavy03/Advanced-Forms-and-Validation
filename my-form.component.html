@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<form *ngIf="myForm" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+  <div formArrayName="sections" *ngIf="myForm.get('sections') as sectionsArray">
+    <div *ngFor="let sectionControl of sectionsArray.controls; let i = index" [formGroupName]="i">
+      <h2>Section {{ i + 1 }}</h2>
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" [formControl]="sectionControl.get('name')">
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" [formControl]="sectionControl.get('email')">
+      </div>
+      <div class="form-group">
+        <label for="phone">Phone:</label>
+        <input type="tel" id="phone" [formControl]="sectionControl.get('phone')">
+      </div>
+      <!-- Add other form controls for each section -->
+    </div>
+  </div>
+
+  <button type="button" (click)="addSection()">Add Section</button>
+  <button type="submit">Submit</button>
+</form>
+
+</body>
+</html>
